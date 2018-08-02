@@ -11,7 +11,7 @@ Quan điểm chung của hầu hết các lời khuyên là _"Tránh rủi ro"_,
 
 Tôi thực sự có ý đó. [Tài liệu](https://getcomposer.org/doc/) rất tuyệt và một vài giờ đọc nó sẽ giúp bạn tiết kiệm thời gian hơn trong thời gian dài. Bạn sẽ ngạc nhiên khi có bao nhiêu thứ mà Composer có thể làm được.
 
-## Lời khuyên #2: Hãy nhận biết sự khác biế giữa "project" và "library"
+## Lời khuyên #2: Hãy nhận biết sự khác biệt giữa "project" và "library"
 
 
 Điều quan trọng nhất cần phải biết là bạn đang tạo ra một _"project"_ hay một _"library"_. Mỗi loại sẽ yêu cầu các bài thực hành riêng biệt.
@@ -134,13 +134,13 @@ Nhưng phải làm gì, nếu bạn gặp phải một xung đột merge trong `
 
 Điều quan trọng là nhận thức được sử khác nhau giữa khối `require` và `require-dev`.
 
-Các package được required để chạy ứng dụng or thư viện nên được định nghĩa trong `require` (ví dụ Symfony, Doctrine, Twig, Guzzle, ...). Nếu bạn đang tạo ra một thư viện, hãy cẩn trọng những gì bạn đặt trong `require`. Bởi vì mỗi phụ thuộc trong phần này cũng là phụ thuộc trong ứng dụng, mà bạn sử dụng trong thư viện.
+Các package được required để chạy ứng dụng hoặc thư viện nên được định nghĩa trong `require` (ví dụ Symfony, Doctrine, Twig, Guzzle, ...). Nếu bạn đang tạo ra một thư viện, hãy cẩn trọng những gì bạn đặt trong `require`. Bởi vì mỗi phụ thuộc trong phần này cũng là phụ thuộc trong ứng dụng, mà bạn sử dụng trong thư viện.
 
 Các package cần thiết để phát triển ứng dụng (hoặc thư viện) nên được định nghĩa trong `require-dev` (ví dụ PHPUnit, PHP_CodeSniffer, PHPStan).
 
 ## Lời khuyên #11: Cập nhật các phụ thuộc 1 cách an toàn
 
-T đoán rằng chúng ta đều có thể đồng ý 1 sự thật rằng các phụ thuộc nên được cập nhật một cách thường xuyên. vấn đề tôi muốn bàn ở đây là việc cập nhật các phụ thuộc nên được thực hiện một cách rõ ràng và cẩn trọng, chứ không phải chỉ cần làm cho xong như những công việc khác. Nếu bạn đang muốn sửa đổi một cái gì đó và cập nhật một vài thời điểm tại cùng thời điểm, bạn không thể dễ dàng biết rằng liệu ứng dụng đã bị hỏng do bạn sữa đổi hay do việc cập nhật đã gây nên.
+Tôi đoán rằng chúng ta đều có thể đồng ý 1 sự thật rằng các phụ thuộc nên được cập nhật một cách thường xuyên. vấn đề tôi muốn bàn ở đây là việc cập nhật các phụ thuộc nên được thực hiện một cách rõ ràng và cẩn trọng, chứ không phải chỉ cần làm cho xong như những công việc khác. Nếu bạn đang muốn sửa đổi một cái gì đó và cập nhật một vài thời điểm tại cùng thời điểm, bạn không thể dễ dàng biết rằng liệu ứng dụng đã bị hỏng do bạn sữa đổi hay do việc cập nhật đã gây nên.
 
 Bạn có thể sử dụng câu lệnh `composer outdated` để xem các phụ thuộc nào có thể được cập nhật. Bạn có thêm lựa chọn `--direct` (hoặc `-D`) để chỉ hiện thị danh sách các phụ thuộc được khai báo trong `composer.json`. Ngoài ra còn có một lựa chọn `-m` chỉ để hiển thị các bản cập nhật ở mức nhỏ.
 
@@ -150,12 +150,12 @@ Bạn có thể sử dụng câu lệnh `composer outdated` để xem các phụ
   2. Cập nhật phiên bản phụ thuộc trong `composer.json` đến một phiên bản mới nhất
   3. Chạy `composer update phpunit/phpunit --with-dependencies` (thay `phpunit/phpunit`bằng thư viện bạn đang cập nhật)
   4. Kiểm tra CHANGELOG trong kho lưu trữ thư viện trên Github để xem có bất kì thay đổi nào không. Nếu có hãy cập nhật ứng dụng.
-  5. Kiểm tra ứng dụng cục bộ (Nếu bạn đang sử dụng Symfony, bạn có thể thấy cảnh báo lỗi trong Debug Bar).
+  5. Kiểm tra ứng dụng trên local (Nếu bạn đang sử dụng Symfony, bạn có thể thấy cảnh báo lỗi trong Debug Bar).
   6. Commit các thay đổi (`composer.json`, `composer.lock` và những gì bạn thấy cần thiết cho phiên bản mới để làm việc)
   7. Đợi CI xây dựng xong.
   8. Merge and deploy
 
-Đôi khi nó có ý nghĩa cập nhật phụ thuộc nhiều hơn cùng một lúc, ví dụ khi bạn đang cập nhật Doctrine hoặc Sysfony.  Trường hợp này bạn có thể liệt kê tất cả trong câu lệnh update:
+Đôi khi nó sẽ xảy ra vấn đề khi cập nhật nhiều dependency cùng lúc, ví dụ khi bạn đang cập nhật Doctrine hoặc Sysfony.  Trường hợp này bạn có thể liệt kê tất cả trong câu lệnh update:
 
     
     
@@ -170,7 +170,7 @@ Hoặc bạn có thể sử dụng wildcard để cập nhật tất cả phụ 
     composer update symfony/* --with-dependencies
     
 
-Tôi biết rằng tất cả những điều này nghe có vẻ thừa thãi, nhưng bạn chắc chắn sẽ cập nhật các phụ thuộc một các tình cờ, vì vậy sẽ an toàn hơn.
+Tôi biết rằng tất cả những điều này nghe có vẻ thừa thãi, nhưng bạn chắc chắn sẽ cập nhật các phụ thuộc một cách tình cờ, vì vậy sẽ an toàn hơn.
 
 Một cách ngắn gọn là cập nhật tất cả các `require-dev` phụ thuộc cùng một lúc (nếu chúng không yêu cầu thay đổi code, nếu không tôi sẽ đề xuất sử dụng branch khác nhau để review code dễ dàng hơn)
 
@@ -248,7 +248,7 @@ Nhưng không cần phải lo lắng, có một cách dễ dàng. Chỉ cần ch
 
 Lời khuyên ở đây là sử dụng `vcs` như một loại repository và Composer sẽ tìm ra cách đúng để lấy các package phù hợp. Ví dụ nếu bạn đang thêm một fork từ Github, nó sẽ sử dụng API của nó để tải tệp xuống file zip thay vì clone toàn bộ repository.
 
-Nhưng nó lại phức tạp hơn cho một cài đặt cá nhân trên Gitlab. Nếu bạn sử dụng `vcs` như một loại repository, Composer sẽ phát hiện ra rằng đây là một cài đặt Gitlab đang cố tải xuống package sử dụng API (yêu cầu API key)tôi không muốn thiết lập nó, vì vậy tôi đã cài đặt cho thiết lập này(sử dụng SSH  để clone):
+Nhưng nó lại phức tạp hơn khi cài đặt cá nhân trên Gitlab. Nếu bạn sử dụng `vcs` như một loại repository, Composer sẽ phát hiện ra rằng đây là một cài đặt Gitlab đang cố tải xuống package sử dụng API (yêu cầu API key)tôi không muốn thiết lập nó, vì vậy tôi đã cài đặt cho thiết lập này(sử dụng SSH  để clone):
 
 
 Đầu tiên chỉ định repository với kiểu `git`:
@@ -274,7 +274,7 @@ Sau đó sử dụng package mà bình thường bạn sẽ có:
 
 ## Lời khuyên #17: Làm thế nào để tạm thời sử dụng một branch với bugfix từ fork
 
-Nếu như bạn tìm một lỗi trong thư viện public và bạn fix nó từ fork của bạn trên Github, bạn cần phải cài đặt thư viện từ repository thay vì từ cái chính thức (cho đến khi bugfix được merge và phiên bản đã sửa lỗi được phát hành).
+Nếu như bạn tìm một lỗi trong thư viện public và bạn fix nó từ fork của bạn trên Github, bạn cần phải cài đặt thư viện từ repository thay vì từ bản chính thức (cho đến khi bugfix được merge và phiên bản đã sửa lỗi được phát hành).
 
 Điều này có thể được thực hiện dễ dàng bằng một [aliasing cùng dòng](https://getcomposer.org/doc/articles/aliases.md#require-inline-alias):
 
